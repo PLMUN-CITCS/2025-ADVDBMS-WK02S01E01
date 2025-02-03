@@ -100,15 +100,6 @@ Only perform this if this is the first time you will setup your Git Environment
    - **SQL Syntax:** The SQL syntax might vary slightly between different database systems. Refer to the documentation for your specific DBMS.
    - `IF EXISTS` **Clause:** The `IF EXISTS` clause in the `DROP DATABASE` statement is a good practice to prevent errors if the database doesn't exist.
    - **Verification:** The `SELECT DATABASE();` (or equivalent) statement is a useful way to confirm which database is currently being used.
-
-   **Best Practices for Variable Naming:**
-   - Descriptive Names: Choose names that clearly indicate the variable's purpose (e.g., count instead of x, total_price instead of tp).
-   - Lowercase with Underscores (Snake Case): Use lowercase letters and separate words with underscores (e.g., total_count, item_name, user_age). This is the most common and recommended convention in Python.
-   - Avoid Single-Character Names (except for very short loops): Unless you're using a variable in a very limited scope (like a loop counter i), avoid single-letter names like a, b, or x. Descriptive names are much better.
-   - Be Consistent: Stick to one naming convention throughout your code.
-   - Avoid Reserved Keywords: Don't use Python's reserved keywords (e.g., for, while, if, else, print, class, def) as variable names.
-   - Start with a Letter or Underscore: Variable names must start with a letter (a-z, A-Z) or an underscore (_). They cannot start with a number.
-   - Can Contain Numbers: After the first character, variable names can contain letters, underscores, and numbers.
       
    **Step-by-Step Instructions:**
 
