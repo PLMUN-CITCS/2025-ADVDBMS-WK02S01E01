@@ -80,7 +80,7 @@ Only perform this if this is the first time you will setup your Git Environment
 **Exercise # 01 - Guided Coding Exercise: Database Creation and Management**
 
    **Objective:**
-   Learn to create, use, and optionally drop a database using SQL. This exercise will introduce basic SQL commands and file management practices for database development.
+   Learn to create, use, and drop a database using SQL. This exercise will introduce basic SQL commands and file management practices for database development.
 
    **Folder Structure:**
    ```txt
