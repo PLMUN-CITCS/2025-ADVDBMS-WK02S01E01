@@ -1,7 +1,7 @@
-# 2025-ITELEC2-WK02S01E01
-Week 02 - Python Variables, Operators and I/O Statements
+2025-ADVDBMS-WK02S0E01
+Week 02 - Review on Database Concepts
 
-Exercise # 01 - Guided Coding Exercise: Variables, Literals, and Case-Sensitivity in Python (with Naming Conventions)
+Exercise # 01 - Guided Coding Exercise: Database Creation and Management
 
 ## **Instructions**
 
@@ -77,25 +77,29 @@ Only perform this if this is the first time you will setup your Git Environment
 
 ### **Step 3: Complete the Assignment**
 
-**Exercise # 01 - Guided Coding Exercise: Variables, Literals, and Case-Sensitivity in Python (with Naming Conventions)**
+**Exercise # 01 - Guided Coding Exercise: Database Creation and Management**
 
    **Objective:**
-   This exercise aims to solidify your understanding of variable declaration, data types (integers, floats, and strings), the crucial concept of case-sensitivity in Python, and best practices for variable naming. You will learn how to create variables, assign values of different types, observe how Python distinguishes between variables based on their case, and write code that is more readable and maintainable.
+   Learn to create, use, and optionally drop a database using SQL. This exercise will introduce basic SQL commands and file management practices for database development.
 
-   **Desired Output:**
+   **Folder Structure:**
    ```txt
-   Integer (count): 10
-   Integer (total_count): 20
-   Decimal: 3.14
-   Text: Hello, Python!
-   Boolean: True
-   None Value: None
+   university_db/
+   ├── create_and_use_db.sql
+   └── drop_db.sql
    ```
+
+   **File Naming Convention:**
+   - `create_and_use_db.sql`: Contains SQL statements for creating and using the database.
+   - `drop_db.sql`: Contains the SQL statement for dropping the database.
+
    **Notable Observations (to be discussed after completing the exercise):**
-   - Python is case-sensitive. count and total_count are treated as distinct variables.
-   - Variable names can be assigned and reassigned. The last assignment to a variable is the value it holds.
-   - Different data types are used to represent different kinds of data (numbers vs. text).
-   - Following naming conventions makes code more readable and understandable.
+   - **Case Sensitivity:** Database and table names might be case-sensitive depending on your SQL system. It's good practice to be consistent with casing.
+   - **Error Handling:** In a real application, you would want to add more robust error handling (e.g., checking if the database already exists before creating it).
+   - **Database Design:** This exercise only covers creating and dropping the database. The next step would be to design the tables within the `UniversityDB` to store information about students, courses, instructors, etc.
+   - **SQL Syntax:** The SQL syntax might vary slightly between different database systems. Refer to the documentation for your specific DBMS.
+   - `IF EXISTS` **Clause:** The `IF EXISTS` clause in the `DROP DATABASE` statement is a good practice to prevent errors if the database doesn't exist.
+   - **Verification:** The `SELECT DATABASE();` (or equivalent) statement is a useful way to confirm which database is currently being used.
 
    **Best Practices for Variable Naming:**
    - Descriptive Names: Choose names that clearly indicate the variable's purpose (e.g., count instead of x, total_price instead of tp).
@@ -105,69 +109,46 @@ Only perform this if this is the first time you will setup your Git Environment
    - Avoid Reserved Keywords: Don't use Python's reserved keywords (e.g., for, while, if, else, print, class, def) as variable names.
    - Start with a Letter or Underscore: Variable names must start with a letter (a-z, A-Z) or an underscore (_). They cannot start with a number.
    - Can Contain Numbers: After the first character, variable names can contain letters, underscores, and numbers.
-   
-   **Literals:**
-   A literal is a raw value that is directly written in the code. It represents a fixed value.
-   - Examples:
-      - 10 (integer literal)
-      - 3.14 (floating-point literal)
-      - "Hello, Python!" (string literal)
-      - True (boolean literal)
-      - None (None literal)
-   
+      
    **Step-by-Step Instructions:**
 
-   1. Setting up: Open your preferred Python environment or Text Editor, and create a Python Script.
-      - Required Filename: `exercise_01.py`
+   1. Setting up the Environment
+      - Ensure you have a SQL database management system installed (e.g., MySQL, PostgreSQL, SQL Server). This exercise will use generic SQL syntax, but you might need to adjust slightly depending on your specific DBMS.
+      - Create the `university_db` directory. Inside it, create the two SQL files as shown in the folder structure above.
       
-   3. Create variables with numeric literals:
-      - Declare a variable named `count` and assign it the integer literal `10`.
-      - Declare another variable named `decimal_value` and assign it the floating-point literal `3.14`.
-         ```python
-         count = 10                  # 10 is an integer literal
-         decimal_value = 3.14        # 3.14 is a float literal
-         ```
+   2. create_and_use_db.sql (Create and Use Database):
+      - Open `create_and_use_db.sql` in a text editor.
+      - Create the Database:
+      ```SQL
+      -- Step 1: Create a database called UniversityDB
+      CREATE DATABASE UniversityDB;
+      ```
       
-   4. Create a variable with a string literal:
-      - Declare a variable named `message` and assign it the string literal `"Hello, Python!"`.
-         ```python
-         message = "Hello, Python!"   # "Hello, Python!" is a string literal
-         ```
+      - Use the Database:
+      ```SQL
+      -- Step 2: Use the newly created database
+      USE UniversityDB;
 
-   5. Create a variable with a boolean literal:
-      - Declare a variable named `is_active` and assign it the boolean literal `True`.
-         ```python
-         is_active = True              # True is a boolean literal
+      -- Verification (Optional): You can add a simple query to verify the database is selected.
+      SELECT DATABASE(); -- This will show the currently selected database.
+      ```
+      
+      - Save the `create_and_use_db.sql` file.
+      
+   3. `drop_db.sql` (Drop Database):
+      - Open `drop_db.sql` in a text editor.
+      - Drop the Database
+         ```SQL
+         -- Step 3: (Optional) Drop the database if needed.  Use with extreme caution!
+         USE UniversityDB;
+         DROP DATABASE IF EXISTS UniversityDB; -- The IF EXISTS clause prevents an error if the database doesn't exist.
          ```
+      - Save the `drop_db.sql` file.
 
-   6. Create a variable with the None literal:
-      - Declare a variable named result and assign it the `None` literal. `None` represents the absence of a value.
-         ```python
-         result = None                # None is the None literal
-         ```
-
-   7. Demonstrate case-sensitivity and reassignment:
-      - Reassign the variable count to a new value (e.g., 10).
-      - Declare a new variable named total_count and assign it a different value (e.g., 20).
-         ```python
-         count = 10                    # or any integer literal
-         total_count = 20              # or any other integer literal
-         ```
-
-   8. Display the values:
-      - Use the print() function to display the values of all variables, including the boolean and None variables. Include descriptive labels.
-         ```python
-         print("Integer (count):", count)
-         print("Integer (total_count):", total_count)
-         print("Decimal:", decimal_value)
-         print("Text:", message)
-         print("Boolean:", is_active)
-         print("None Value:", result)
-         ```
-         
-   9. Run the code: Execute your Python code.
-   10. Observe the output: Compare your output with the "Desired Output" shown above.
-   11. Discussion (Notable Observations):  Discuss the same points as before, and discuss the concept of literals.  How are they different from variables?  Why are they important?  Give examples of different types of literals.
+   4. Executing the SQL Scripts:
+      - Open your SQL client (e.g., MySQL Workbench, pgAdmin, SQL Server Management Studio). Connect to your database server.
+      - Creating and Using: Open the `create_and_use_db.sql` file in your SQL client or execute it from the command line. This will create the `UniversityDB` and switch the connection to use it.
+      - Dropping: If you want to drop the database (e.g., to start over), open the `drop_db.sql` file in your SQL client or execute it. Be very careful with this command, as it will permanently delete the database and all its data.
 
 ### **Step 4: Push Changes to GitHub**
 Once you've completed your changes, follow these steps to upload your work to your GitHub repository.
