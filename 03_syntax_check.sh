@@ -20,7 +20,7 @@ for file in "${files[@]}"; do
   echo "Checking syntax for $filepath..."
 
   # Run sqlfluff and capture the output and exit code
-  output=$(sqlfluff lint "$filepath" --dialect mysql -disable=C 2>&1) # Capture stderr too
+  output=$(sqlfluff lint "$filepath" --dialect mysql 2>&1) # Capture stderr too
   exit_code=$?
 
   if [ "$exit_code" -eq 0 ]; then
