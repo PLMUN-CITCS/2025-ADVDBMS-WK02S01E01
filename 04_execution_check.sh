@@ -5,23 +5,13 @@ DB_HOST="${DB_HOST:-127.0.0.1}"  # Default to 127.0.0.1 if not set
 DB_PORT="${DB_PORT:-4000}"      # Default to 4000 if not set
 DB_USER="${DB_USER:-root}"      # Default to root if not set
 
-# Check if required environment variables are set
-if [ -z "$DB_PASSWORD" ]; then
-  echo "Error: DB_PASSWORD environment variable is not set."
-  exit 1
-fi
-
-if [ -z "$DB_NAME" ]; then
-  echo "Error: DB_NAME environment variable is not set."
-  exit 1
-fi
-
-
 # Directory containing the SQL scripts
 SQL_DIR="university_db"
 
 # Array of SQL script filenames (or use a wildcard)
-SQL_FILES=("$SQL_DIR"/*.sql)  # Dynamically get all .sql files
+declare -a SQL_FILES
+#SQL_FILES=("$SQL_DIR"/*.sql)  # Dynamically get all .sql files
+SQL_FILES=("create_and_use_db.sql" "drop_db.sql")  # Static list of filenames
 
 # Loop through the SQL files
 for sql_file in "${SQL_FILES[@]}"; do
