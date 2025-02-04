@@ -29,7 +29,7 @@ for file in "${files[@]}"; do
     echo "Error: Syntax errors found in $filepath:"
     echo "$output"  # Print the sqlfluff output
     # Optional: Exit with an error if you want the script to stop on errors:
-    # exit 1
+    exit 1
   fi
 done
 
