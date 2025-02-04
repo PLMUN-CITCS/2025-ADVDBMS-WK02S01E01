@@ -8,43 +8,62 @@ jobs:
   run-autograding-tests:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
+    services:
+      tidb:
+        image: pingcap/tidb:latest
+        ports:
+          - 4000:4000
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint
-    - name: File Existence Check - exercise_01.py
+        pip install mysql-connector-python
+    - name: Wait for TiDB to be ready
+      run: |
+        until mysqladmin ping -h "127.0.0.1" -P 4000 --protocol=tcp --silent; do
+          echo "Waiting for TiDB to be ready..."
+          sleep 5
+        done
+    - name: Folder Existence Check - university_db Folder
+      id: folder-existence-check
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Folder Existence Check - university_db Folder
+        command: |
+          directory="university_db"
+
+          if [ -d "$directory" ]; then
+            echo "Folder exists"
+          else
+            echo "Folder does not exist"
+          fi
+        timeout: 10
+        max-score: 10
+    - name: File Existence Check - Checking Required Scripts
       id: file-existence-check
       uses: classroom-resources/autograding-command-grader@v1
       with:
-        test-name: File Existence Check - exercise_01.py
-        command: "test -f exercise_01.py"
+        test-name: File Existence Check - Checking Required Scripts
+        command: |
+          directory="university_db"
+          files=("create_and_use_db.sql" "drop_db.sql") # Array of filenames
+
+          for file in "${files[@]}"; do  # Important: Quote "${files[@]}"
+            filepath="$directory/$file" # Construct the full path
+            if [ -f "$filepath" ]; then
+              echo "$filepath exists"
+            else
+              echo "$filepath does not exist"
+            fi
+          done
         timeout: 10
         max-score: 10
-    - name: Syntax Check - exercise_01.py
-      id: syntax-check
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: Syntax Check - exercise_01.py
-        command: "pylint exercise_01.py --disable=C"
-        timeout: 10
-        max-score: 30
-    - name: Run Check - exercise_01.py
-      id: logic-check
-      uses: classroom-resources/autograding-command-grader@v1
-      with:
-        test-name: Run Check - exercise_01.py
-        setup-command: "chmod +x ./run_tests.sh"
-        command: "./run_tests.sh"
-        timeout: 10
-        max-score: 60
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
+        FOLDER-EXISTENCE-CHECK_RESULTS: "${{steps.folder-existence-check.outputs.result}}"
         FILE-EXISTENCE-CHECK_RESULTS: "${{steps.file-existence-check.outputs.result}}"
-        SYNTAX-CHECK_RESULTS: "${{steps.syntax-check.outputs.result}}"
-        LOGIC-CHECK_RESULTS: "${{steps.logic-check.outputs.result}}"
       with:
-        runners: file-existence-check,syntax-check,logic-check
+        runners: folder-existence-check,file-existence-check
