@@ -14,7 +14,7 @@ for file in "${files[@]}"; do
   filepath="$directory/$file"
   if [ ! -f "$filepath" ]; then
     echo "Error: $filepath does not exist."
-    continue  # Skip to the next file
+    exit 1  # Skip to the next file
   fi
 
   echo "Checking syntax for $filepath..."
