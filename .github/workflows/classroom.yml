@@ -54,10 +54,21 @@ jobs:
         command: "./03_syntax_check.sh"
         timeout: 10
         max-score: 35
+    - name: SQL Execution Check - Executing SQL Scripts
+      id: sql-execution-check
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: SQL Execution Check - Executing SQL Scripts
+        setup-command: "chmod +x ./04_execution_check.sh"
+        command: "./04_execution_check.sh"
+        timeout: 10
+        max-score: 35
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         FOLDER-EXISTENCE-CHECK_RESULTS: "${{steps.folder-existence-check.outputs.result}}"
         FILE-EXISTENCE-CHECK_RESULTS: "${{steps.file-existence-check.outputs.result}}"
+        SQL-SYNTAX-CHECK_RESULTS: "${{steps.sql-syntax-check.outputs.result}}"
+        SQL-EXECUTION-CHECK_RESULTS: "${{steps.sql-execution-check.outputs.result}}"
       with:
-        runners: folder-existence-check,file-existence-check
+        runners: folder-existence-check,file-existence-check,sql-syntax-check,sql-execution-check
