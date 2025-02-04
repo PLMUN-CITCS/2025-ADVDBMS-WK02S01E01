@@ -16,10 +16,11 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    - name: Install Python dependencies
+    - name: Install Project dependencies
       run: |
         python -m pip install --upgrade pip
         pip install mysql-connector-python
+        pip install sqlfluff
     - name: Wait for TiDB to be ready
       run: |
         until mysqladmin ping -h "127.0.0.1" -P 4000 --protocol=tcp --silent; do
@@ -31,19 +32,28 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Folder Existence Check - university_db Folder
-        setup-command: "chmod +x ./folder_check.sh"
-        command: "./folder_check.sh"
+        setup-command: "chmod +x ./01_folder_check.sh"
+        command: "./01_folder_check.sh"
         timeout: 10
-        max-score: 10
+        max-score: 15
     - name: File Existence Check - Checking Required Scripts
       id: file-existence-check
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: File Existence Check - Checking Required Scripts
-        setup-command: "chmod +x ./files_check.sh"
-        command: "./files_check.sh"
+        setup-command: "chmod +x ./02_files_check.sh"
+        command: "./02_files_check.sh"
         timeout: 10
-        max-score: 10
+        max-score: 15
+    - name: SQL Syntax Check - Validating SQL Scripts
+      id: sql-syntax-check
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: SQL Syntax Check - Validating SQL Scripts
+        setup-command: "chmod +x ./03_syntax_check.sh"
+        command: "./03_syntax_check.sh"
+        timeout: 10
+        max-score: 35
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
