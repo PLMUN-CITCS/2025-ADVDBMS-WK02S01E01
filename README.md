@@ -112,7 +112,7 @@ Only perform this if this is the first time you will setup your Git Environment
       - Create the Database:
       ```SQL
       -- Step 1: Create a database called UniversityDB
-      CREATE DATABASE UniversityDB;
+      CREATE DATABASE `UniversityDB`;
       ```
       
       - Use the Database:
@@ -121,7 +121,13 @@ Only perform this if this is the first time you will setup your Git Environment
       USE UniversityDB;
 
       -- Verification (Optional): You can add a simple query to verify the database is selected.
+      -- Step 2: Use the newly created database
+      USE `UniversityDB`;
+      
+      -- Verification (Optional): 
+      -- You can add a simple query to verify the database is selected.
       SELECT DATABASE(); -- This will show the currently selected database.
+      
       ```
       
       - Save the `create_and_use_db.sql` file.
@@ -130,9 +136,13 @@ Only perform this if this is the first time you will setup your Git Environment
       - Open `drop_db.sql` in a text editor.
       - Drop the Database
          ```SQL
-         -- Step 3: (Optional) Drop the database if needed.  Use with extreme caution!
-         USE UniversityDB;
-         DROP DATABASE IF EXISTS UniversityDB; -- The IF EXISTS clause prevents an error if the database doesn't exist.
+         -- Step 3: (Optional) Drop the database if needed. 
+         -- Use with extreme caution!
+         USE `UniversityDB`;
+         
+         -- The IF EXISTS clause prevents an error if the database doesn't exist.
+         DROP DATABASE IF EXISTS `UniversityDB`;
+
          ```
       - Save the `drop_db.sql` file.
 
