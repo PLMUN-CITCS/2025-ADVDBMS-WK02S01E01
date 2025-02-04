@@ -31,14 +31,8 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Folder Existence Check - university_db Folder
-        command: |
-          directory="university_db"
-
-          if [ -d "$directory" ]; then
-            echo "Folder exists"
-          else
-            echo "Folder does not exist"
-          fi
+        setup-command: "chmod +x ./folder_check.sh"
+        command: "./folder_check.sh"
         timeout: 10
         max-score: 10
     - name: File Existence Check - Checking Required Scripts
@@ -46,19 +40,8 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: File Existence Check - Checking Required Scripts
-        command: |
-          declare -a files
-          directory="university_db"
-          files=("create_and_use_db.sql" "drop_db.sql") # Array of filenames
-
-          for file in "${files[@]}"; do  # Important: Quote "${files[@]}"
-            filepath="$directory/$file" # Construct the full path
-            if [ -f "$filepath" ]; then
-              echo "$filepath exists"
-            else
-              echo "$filepath does not exist"
-            fi
-          done
+        setup-command: "chmod +x ./files_check.sh"
+        command: "./files_check.sh"
         timeout: 10
         max-score: 10
     - name: Autograding Reporter
