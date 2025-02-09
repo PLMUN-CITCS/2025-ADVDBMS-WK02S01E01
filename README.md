@@ -1,4 +1,4 @@
-2025-ADVDBMS-WK02S02E01
+# **2025-ADVDBMS-LAB003**
 Week 02 - Review on Database Concepts
 
 Laboratory # 03 - Guided Coding Exercise: Database Creation and Management
